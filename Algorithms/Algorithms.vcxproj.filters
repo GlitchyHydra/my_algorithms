@@ -18,6 +18,8 @@
     <ClInclude Include="src\hzpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\QuickSort.h" />
+    <ClInclude Include="src\LinkedList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\String.cpp">
@@ -29,5 +31,6 @@
     <ClCompile Include="tests\stoi.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="src\LinkedList.cpp" />
   </ItemGroup>
 </Project>

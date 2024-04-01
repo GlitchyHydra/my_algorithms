@@ -136,11 +136,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\LinkedList.h" />
+    <ClInclude Include="src\QuickSort.h" />
     <ClInclude Include="src\Strings.h" />
     <ClInclude Include="src\TreeTraverse.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LinkedList.cpp" />
     <ClCompile Include="src\String.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

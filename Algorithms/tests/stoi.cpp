@@ -129,11 +129,56 @@ namespace StringTests {
     }
 }
 
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode() : val(0), next(nullptr) {}
+     ListNode(int x) : val(x), next(nullptr) {}
+     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ };
 
+int dfsNextValue (ListNode* node, int prevNum, int left, std::pair<int,int>& rightIndices, std::vector<int>& res) {
+    if (!node->next)
+        return node->val;
 
+    int currentNum = node->val;
+    int nextNum = dfsNextValue(node->next, node->val, left + 1, rightIndices, res);
+    if (!(currentNum > nextNum && currentNum > prevNum ||
+        currentNum < nextNum && currentNum < prevNum)) {
+        return node->val;
+    }
+
+    if (rightIndices.second > -1) {
+        res[0] = std::min (res[0], rightIndices.first - left);
+        res[1] = rightIndices.second - left;
+        rightIndices.first = left;
+    } else {
+        rightIndices.first = left;
+        rightIndices.second = left;
+    }
+
+    return node->val;
+}
+
+    std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+        std::pair<int, int> rightIndices {-1, -1};
+        std::vector<int> res { INT_MAX, -1 };
+        dfsNextValue (head, head->val, 0, rightIndices, res);
+        return res[0] == INT_MAX ? std::vector {-1, -1} : res; 
+    }
+
+    //5,3,1,2,5,1,2
 int main(int argc, char** argv)
 {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    ListNode* head = new ListNode(5);
+    head->next = new ListNode(3);
+    head->next->next = new ListNode(1);
+    head->next->next->next = new ListNode(2);
+    head->next->next->next->next = new ListNode(5);
+    head->next->next->next->next->next = new ListNode(1);
+    head->next->next->next->next->next->next = new ListNode(2);
+    nodesBetweenCriticalPoints (head);
+    /*::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();*/
     return 1;
 }
